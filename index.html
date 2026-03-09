@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Final project report website for BOTspiel: Autonomous Curling Robot."
+    />
+    <title>BOTspiel: Autonomous Curling Robot</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="mobile-header">
+        <a class="mobile-title" href="#hero">BOTspiel</a>
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="sidebar-nav"
+          aria-label="Toggle navigation menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </header>
+
+      <aside class="sidebar" id="sidebar-nav">
+        <div class="sidebar__inner">
+          <div class="sidebar__brand">
+            <p class="sidebar__eyebrow">Engineering Final Report</p>
+            <h1>BOTspiel</h1>
+            <p class="sidebar__subtitle">Autonomous Curling Robot</p>
+          </div>
+
+          <nav class="sidebar__nav" aria-label="Section navigation">
+            <a href="#hero" class="nav-link active">Header</a>
+            <a href="#abstract" class="nav-link">Abstract</a>
+            <a href="#hardware" class="nav-link">Hardware Design</a>
+            <a href="#software" class="nav-link">Software Architecture</a>
+            <a href="#gallery" class="nav-link">Media Gallery</a>
+            <a href="#appendix" class="nav-link">Code Appendix</a>
+          </nav>
+
+          <div class="sidebar__footer">
+            <p>ME 210 Final Project</p>
+            <p>Vanilla HTML, CSS, and JavaScript</p>
+          </div>
+        </div>
+      </aside>
+
+      <main class="content">
+        <section id="hero" class="section hero-section">
+          <div class="hero-copy">
+            <p class="section-label">Section 1</p>
+            <h2>BOTspiel: Autonomous Curling Robot</h2>
+            <p class="hero-subtitle">Final Project Report</p>
+            <div class="hero-meta" aria-label="Project metadata">
+              <div>
+                <span class="meta-label">Team Members</span>
+                <p>[Insert team member names]</p>
+              </div>
+              <div>
+                <span class="meta-label">Course / Term</span>
+                <p>[Insert course title and quarter]</p>
+              </div>
+              <div>
+                <span class="meta-label">Submission Date</span>
+                <p>[Insert submission date]</p>
+              </div>
+            </div>
+          </div>
+
+          <figure class="hero-figure">
+            <div class="hero-image placeholder-frame" role="img" aria-label="Placeholder hero image of the autonomous curling robot">
+              <div class="placeholder-frame__content">
+                <span class="placeholder-kicker">Hero Image</span>
+                <strong>Autonomous Curling Robot Photograph</strong>
+                <p>Replace with a high-resolution image of the final chassis, sensor array, and scoring mechanism.</p>
+              </div>
+            </div>
+            <figcaption>
+              Figure 1. Primary system photograph showing the robot configuration used during final validation.
+            </figcaption>
+          </figure>
+        </section>
+
+        <section id="abstract" class="section">
+          <div class="section-heading">
+            <p class="section-label">Section 2</p>
+            <h2>Abstract</h2>
+          </div>
+          <div class="prose">
+            <p>
+              BOTspiel is a holonomic autonomous curling platform developed to navigate a constrained arena,
+              align to taped field markings, and deploy game stones with repeatable directional control. The
+              system integrates a mecanum-wheel drivetrain with distributed ranging and reflectance sensing,
+              allowing the robot to execute both translational and rotational corrections without requiring a
+              complex localization stack. Three HC-SR04 ultrasonic sensors provide coarse geometric awareness of
+              the starting enclosure and surrounding walls, while three TCRT5000 infrared sensors detect line
+              position and critical scoring thresholds during forward and reverse travel.
+            </p>
+            <p>
+              The platform architecture is centered around an Arduino Mega, which coordinates sensor polling,
+              drive-state transitions, actuation timing, and safety interlocks within a deterministic control
+              loop. A turntable-based aiming mechanism and a linear pusher actuator convert navigational accuracy
+              into controlled stone deployment. The overall behavior is structured as a staged state machine:
+              orient within the start box, acquire the guide line, follow the path to the hog line, perform a
+              programmed scoring maneuver, and return to the initial region for reset.
+            </p>
+            <p>
+              This report documents the hardware and software decisions that enabled reliable arena traversal,
+              discusses the tradeoffs imposed by inexpensive sensors and time-based actuation, and presents a
+              framework for evaluating repeatability, robustness, and future system refinement. Detailed results,
+              media documentation, and the full Arduino control script are included to support replication and
+              post-project analysis.
+            </p>
+          </div>
+        </section>
+
+        <section id="hardware" class="section">
+          <div class="section-heading">
+            <p class="section-label">Section 3</p>
+            <h2>Hardware Design</h2>
+          </div>
+
+          <div class="subsection">
+            <h3>Chassis &amp; Mecanum Drivetrain</h3>
+            <div class="prose">
+              <p>
+                This subsection should describe the mechanical design rationale behind the chassis footprint,
+                mass distribution, wheel placement, and structural stiffness. Discuss how the mecanum wheel
+                geometry enables omnidirectional movement, why that mobility was essential for corner alignment
+                and line reacquisition, and how the final wheelbase dimensions were selected relative to arena
+                width constraints. Include manufacturing decisions, material choices, fastening methods, and any
+                observed mechanical tolerances that affected translational precision.
+              </p>
+              <p>
+                Expand this section with measured drivetrain performance, such as strafing drift, rotational bias,
+                wheel slip on competition surfaces, and the effect of battery voltage sag on motor response.
+                Academic reports benefit from quantified observations, so reserve space for tables summarizing
+                wheel diameter, motor free speed, estimated load current, and empirically tuned PWM ranges for
+                straight, diagonal, and in-place rotational maneuvers.
+              </p>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <h3>Arduino Mega Processing</h3>
+            <div class="prose">
+              <p>
+                Use this section to explain why the Arduino Mega was selected as the central controller, with
+                attention to available I/O, interrupt capability, timing determinism, and integration simplicity.
+                Document the mapping between sensors, motor drivers, and actuator channels, and clarify how the
+                firmware schedule balanced ultrasonic triggering, IR thresholding, and actuator sequencing without
+                introducing control latency. If any custom abstractions or helper functions were used to organize
+                the sketch, summarize their role here before referencing the full script in the appendix.
+              </p>
+              <p>
+                The final report should also discuss electrical architecture at the board level, including power
+                regulation, wiring management, shielding or grounding considerations, and any design constraints
+                introduced by simultaneous motor and sensor operation. Placeholder space is intentionally left for
+                a wiring diagram, pin allocation table, and notes on debugging methodology used during integration.
+              </p>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <h3>3x HC-SR04 Ultrasonic Sensors</h3>
+            <div class="prose">
+              <p>
+                This subsection should document physical placement, mounting angle, and the expected measurement
+                envelope of each ultrasonic sensor. Explain how the left, right, and back sensors contributed to
+                orientation detection within the asymmetrical starting box, and outline the limitations caused by
+                specular reflections, cross-talk, minimum range effects, and inconsistent returns at oblique wall
+                angles. Include calibration procedures, timeout thresholds, and the practical meaning of invalid
+                readings in the context of the state machine.
+              </p>
+              <p>
+                Reserve room for plots or tables comparing nominal versus measured distance readings at multiple
+                headings and distances. Such data will strengthen the discussion of why a purely geometric yaw
+                estimate was rejected in favor of a robust heuristic approach using wall-presence patterns.
+              </p>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <h3>3x TCRT5000 IR Sensors</h3>
+            <div class="prose">
+              <p>
+                Use this section to detail how the IR reflectance sensors were mounted relative to the floor,
+                centered about the robot body, and spaced to detect both line deviation and the hog-line stop
+                condition. Describe threshold tuning against the arena tape and background surface, noting how
+                ambient lighting, floor texture, and sensor standoff distance influenced the analog or digital
+                transition point. If filtering or hysteresis was required to prevent oscillation, document it here
+                and connect those choices to observed field behavior.
+              </p>
+              <p>
+                This is also the appropriate place to describe failure modes, such as intermittent clipping during
+                aggressive turns or false positives at tape edges, along with the procedural mitigations used in
+                testing. Placeholder language is intentionally formal so the final draft can absorb measured
+                threshold values and tuning notes directly.
+              </p>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <h3>Turntable</h3>
+            <div class="prose">
+              <p>
+                Insert the mechanical and control description for the aiming turntable in this subsection.
+                Clarify whether the platform used a servo, geared motor, or indexed mechanism, and explain how the
+                turntable established repeatable shot directions despite backlash and time-based control
+                limitations. Academic detail should include rotational range, expected angular resolution, physical
+                hard stops, and any tuning performed to align commanded positions with observed stone trajectories.
+              </p>
+              <p>
+                Leave space here for diagrams showing the relationship between the turntable axis, pusher axis,
+                and robot centerline. If the final system supported multiple tactical shot positions, summarize the
+                shot taxonomy and the specific actuation sequence required to achieve each one.
+              </p>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <h3>Linear Actuator (Pusher)</h3>
+            <div class="prose">
+              <p>
+                This subsection should describe the end-effector used to propel the curling stone, including the
+                actuator type, stroke length, guide mechanism, and structural interface with the frame. Explain
+                how the deployment timing was selected, what assumptions were made about stone friction and release
+                conditions, and how retraction was guaranteed prior to the return trajectory. If the actuator was
+                run open-loop, note the implications for repeatability and discuss any strategies used to bound
+                uncertainty.
+              </p>
+              <p>
+                The report should eventually include measured launch consistency, current draw considerations, and
+                any protective logic used to prevent stall or repeated activation. Placeholder space remains for a
+                timing diagram mapping drive halt, aim completion, extension, and retraction events.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="software" class="section">
+          <div class="section-heading">
+            <p class="section-label">Section 4</p>
+            <h2>Software Architecture &amp; Navigation</h2>
+          </div>
+
+          <div class="subsection">
+            <h3>The "Smart Compass" Orientation Algorithm</h3>
+            <div class="prose">
+              <p>
+                Because calculating rotational yaw from a single ultrasonic sensor per side is highly susceptible to noise, the robot utilizes a "Smart Compass" algorithm based on the physical asymmetry of the arena's 16-inch starting box. Instead of mathematically calculating drift, the robot rotates in place and reads the geometry of the walls. If the Left and Back sensors read under 45cm (detecting the corner walls), but the Right sensor reads out of bounds (detecting the open 4-foot arena), the state machine locks the forward orientation. To counteract ultrasonic blindspots where sound waves bounce off at 45-degree angles, the rotational loop incorporates "momentum," allowing the chassis to coast through dead-zones (999 readings) until the flat walls are re-acquired. Once oriented, a diagonal Back-Left mecanum translation tucks the robot perfectly into the corner, requiring a 2-second continuous verification lock from both sensors to confirm a 0-degree starting heading.
+              </p>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <h3>Differential IR Line Following</h3>
+            <div class="prose">
+              <p>
+                The robot navigates the arena using a 3-point TCRT5000 IR sensor array (Front-Left, Front-Right, Back-Center). To acquire the line, the robot strafes right until the Back-Center sensor crosses the tape's threshold. Once locked, it utilizes differential steering to drive down the track. If the Front-Left sensor clips the black tape, the right wheels accelerate while the left wheels decelerate, gently swinging the chassis back to center (and vice versa). This inverted logic is also applied when the robot reverses back to the starting box. The critical stop condition for the firing sequence occurs when both front sensors, which straddle the main line, simultaneously detect black tape, indicating the robot has perfectly intersected the perpendicular hog line.
+              </p>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <h3>The Scoring State Machine</h3>
+            <div class="prose">
+              <p>
+                The master sequence operates strictly sequentially to prevent competing kinematics. Upon reaching the hog line, the drivetrain executes a stopAll() command to settle chassis momentum. The scoring function then activates a turntable to aim, followed by a linear actuator that drives forward at maximum PWM for 3 seconds to deploy the curling stone, and reverses for 3 seconds to retract. To execute diverse tactical shots, the master loop allows for programmed lateral offsets—strafing left or right for a set duration before firing—before returning to the center line to reverse back to the starting box.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="gallery" class="section">
+          <div class="section-heading">
+            <p class="section-label">Section 5</p>
+            <h2>Media Gallery</h2>
+          </div>
+          <div class="prose intro-copy">
+            <p>
+              Use the gallery below to document fabrication stages, subsystem close-ups, arena testing, and final
+              demonstrations. The layout accepts both static imagery and embedded videos, allowing the final ZIP
+              submission to remain visually rich while preserving a consistent academic presentation.
+            </p>
+          </div>
+
+          <div class="gallery-grid">
+            <figure class="gallery-card">
+              <div class="media media--image placeholder-frame" role="img" aria-label="Placeholder image for chassis overview">
+                <div class="placeholder-frame__content">
+                  <span class="placeholder-kicker">Photo Placeholder</span>
+                  <strong>Chassis Overview</strong>
+                </div>
+              </div>
+              <figcaption>Figure 2. Full-system chassis view with labeled drivetrain and sensor locations.</figcaption>
+            </figure>
+
+            <figure class="gallery-card">
+              <div class="media media--image placeholder-frame" role="img" aria-label="Placeholder image for electronics layout">
+                <div class="placeholder-frame__content">
+                  <span class="placeholder-kicker">Photo Placeholder</span>
+                  <strong>Electronics Layout</strong>
+                </div>
+              </div>
+              <figcaption>Figure 3. Internal electronics organization, wiring paths, and controller placement.</figcaption>
+            </figure>
+
+            <figure class="gallery-card">
+              <div class="media media--video iframe-shell">
+                <div class="iframe-shell__toolbar">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+                <iframe
+                  srcdoc="<!doctype html><html><body style='margin:0;display:grid;place-items:center;height:100%;font-family:Inter,Arial,sans-serif;background:linear-gradient(135deg,#eff4f8,#dbe7f3);color:#1f2328;'><div style='text-align:center;padding:24px;'><strong style='display:block;font-size:20px;margin-bottom:8px;'>Video Placeholder</strong><span>Replace with navigation test footage</span></div></body></html>"
+                  title="Placeholder video embed for navigation testing"
+                  loading="lazy"
+                ></iframe>
+              </div>
+              <figcaption>Video 1. Arena navigation test run showing line acquisition and heading correction.</figcaption>
+            </figure>
+
+            <figure class="gallery-card">
+              <div class="media media--video iframe-shell">
+                <div class="iframe-shell__toolbar">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+                <iframe
+                  srcdoc="<!doctype html><html><body style='margin:0;display:grid;place-items:center;height:100%;font-family:Inter,Arial,sans-serif;background:linear-gradient(135deg,#eff4f8,#dbe7f3);color:#1f2328;'><div style='text-align:center;padding:24px;'><strong style='display:block;font-size:20px;margin-bottom:8px;'>Video Placeholder</strong><span>Replace with scoring sequence footage</span></div></body></html>"
+                  title="Placeholder video embed for scoring sequence"
+                  loading="lazy"
+                ></iframe>
+              </div>
+              <figcaption>Video 2. Scoring sequence capture showing turntable aiming and stone deployment.</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section id="appendix" class="section">
+          <div class="section-heading">
+            <p class="section-label">Section 6</p>
+            <h2>Code Appendix</h2>
+          </div>
+          <div class="prose intro-copy">
+            <p>
+              Replace the sample listing below with the final master Arduino C++ script. The styling is prepared
+              for dark-theme presentation using semantic span classes for keywords, comments, types, functions,
+              and string literals.
+            </p>
+          </div>
+
+          <div class="code-panel">
+            <div class="code-panel__header">
+              <span>Master Arduino Script</span>
+              <span>`.ino` / C++</span>
+            </div>
+            <pre><code><span class="token-comment">// BOTspiel master control sketch placeholder</span>
+<span class="token-keyword">const</span> <span class="token-type">int</span> frontLeftIRPin <span class="token-operator">=</span> <span class="token-number">22</span>;
+<span class="token-keyword">const</span> <span class="token-type">int</span> frontRightIRPin <span class="token-operator">=</span> <span class="token-number">23</span>;
+<span class="token-keyword">const</span> <span class="token-type">int</span> backCenterIRPin <span class="token-operator">=</span> <span class="token-number">24</span>;
+
+<span class="token-keyword">void</span> <span class="token-function">setup</span>() {
+  Serial.<span class="token-function">begin</span>(<span class="token-number">115200</span>);
+  <span class="token-comment">// Initialize motors, sensors, and state variables here.</span>
+}
+
+<span class="token-keyword">void</span> <span class="token-function">loop</span>() {
+  <span class="token-comment">// Replace with the final sequential navigation and scoring state machine.</span>
+  Serial.<span class="token-function">println</span>(<span class="token-string">"Insert final BOTspiel control script."</span>);
+  <span class="token-function">delay</span>(<span class="token-number">1000</span>);
+}</code></pre>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
