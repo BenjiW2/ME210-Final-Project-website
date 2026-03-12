@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Final project report website for BOTspiel: Autonomous Curling Robot."
+      content="Single-page final project review site for Team 14's ME 210 project, The Old Bear."
     />
-    <title>BOTspiel: Autonomous Curling Robot</title>
+    <title>The Old Bear | Final Project Review</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="site-shell">
       <header class="mobile-header">
-        <a class="mobile-title" href="#hero">BOTspiel</a>
+        <a class="mobile-title" href="#hero">The Old Bear</a>
         <button
           class="menu-toggle"
           type="button"
@@ -30,22 +30,23 @@
       <aside class="sidebar" id="sidebar-nav">
         <div class="sidebar__inner">
           <div class="sidebar__brand">
-            <p class="sidebar__eyebrow">Engineering Final Report</p>
-            <h1>BOTspiel</h1>
-            <p class="sidebar__subtitle">Autonomous Curling Robot</p>
+            <p class="sidebar__eyebrow">ME 210, Winter 2026</p>
+            <h1>The Old Bear</h1>
+            <p class="sidebar__subtitle">Final Project Review</p>
           </div>
 
           <nav class="sidebar__nav" aria-label="Section navigation">
-            <a href="#hero" class="nav-link active">Header</a>
-            <a href="#abstract" class="nav-link">Abstract</a>
-            <a href="#hardware" class="nav-link">Hardware Design</a>
-            <a href="#software" class="nav-link">Software Architecture</a>
-            <a href="#gallery" class="nav-link">Media Gallery</a>
-            <a href="#appendix" class="nav-link">Code Appendix</a>
+            <a href="#hero" class="nav-link active">Overview</a>
+            <a href="#summary" class="nav-link">Project Summary</a>
+            <a href="#team" class="nav-link">The Team</a>
+            <a href="#design" class="nav-link">Our Bot</a>
+            <a href="#strategy" class="nav-link">Scoring Strategy</a>
+            <a href="#outcomes" class="nav-link">Outcomes</a>
+            <a href="#lessons" class="nav-link">Lessons Learned</a>
           </nav>
 
           <div class="sidebar__footer">
-            <p>ME 210 Final Project</p>
+            <p>Adapted from `ME210_Team14_FinalReviewPresentation.pdf`</p>
             <p>Vanilla HTML, CSS, and JavaScript</p>
           </div>
         </div>
@@ -54,331 +55,243 @@
       <main class="content">
         <section id="hero" class="section hero-section">
           <div class="hero-copy">
-            <p class="section-label">Section 1</p>
-            <h2>BOTspiel: Autonomous Curling Robot</h2>
-            <p class="hero-subtitle">Final Project Report</p>
-            <div class="hero-meta" aria-label="Project metadata">
-              <div>
-                <span class="meta-label">Team Members</span>
-                <p>[Insert team member names]</p>
-              </div>
-              <div>
-                <span class="meta-label">Course / Term</span>
-                <p>[Insert course title and quarter]</p>
-              </div>
-              <div>
-                <span class="meta-label">Submission Date</span>
-                <p>[Insert submission date]</p>
-              </div>
-            </div>
+            <p class="section-label">Final Project Review</p>
+            <h2>The Old Bear</h2>
+            <p class="hero-subtitle">Team 14 · ME 210 · Winter 2026</p>
+            <p class="hero-intro">
+              This site translates the six-slide final review presentation into a readable single-page report.
+              The content below is grounded in the presentation deck: team roster, bot philosophy, overall
+              scoring strategy, observed outcomes, and the main lessons the team took away from the build.
+            </p>
           </div>
 
-          <figure class="hero-figure">
-            <div class="hero-image placeholder-frame" role="img" aria-label="Placeholder hero image of the autonomous curling robot">
-              <div class="placeholder-frame__content">
-                <span class="placeholder-kicker">Hero Image</span>
-                <strong>Autonomous Curling Robot Photograph</strong>
-                <p>Replace with a high-resolution image of the final chassis, sensor array, and scoring mechanism.</p>
-              </div>
-            </div>
-            <figcaption>
-              Figure 1. Primary system photograph showing the robot configuration used during final validation.
-            </figcaption>
-          </figure>
+          <div class="hero-grid" aria-label="Project summary cards">
+            <article class="info-card">
+              <span class="meta-label">Project</span>
+              <h3>The Old Bear</h3>
+              <p>Team 14's ME 210 robot project presented in the final review deck.</p>
+            </article>
+            <article class="info-card">
+              <span class="meta-label">Core Motion</span>
+              <h3>Mecanum Strafing</h3>
+              <p>The drivetrain was selected to let the robot strafe instead of turning for alignment.</p>
+            </article>
+            <article class="info-card">
+              <span class="meta-label">Navigation</span>
+              <h3>Ultrasonics + Line Follow</h3>
+              <p>The scoring cycle combines ultrasonic orientation with centre-line tracking to the hog line.</p>
+            </article>
+            <article class="info-card">
+              <span class="meta-label">Review Focus</span>
+              <h3>Reliability Over Flair</h3>
+              <p>The presentation consistently emphasizes accuracy, repeatability, and stable first-cycle scoring.</p>
+            </article>
+          </div>
         </section>
 
-        <section id="abstract" class="section">
+        <section id="summary" class="section">
           <div class="section-heading">
-            <p class="section-label">Section 2</p>
-            <h2>Abstract</h2>
+            <p class="section-label">Section 1</p>
+            <h2>Project Summary</h2>
           </div>
           <div class="prose">
             <p>
-              BOTspiel is a holonomic autonomous curling platform developed to navigate a constrained arena,
-              align to taped field markings, and deploy game stones with repeatable directional control. The
-              system integrates a mecanum-wheel drivetrain with distributed ranging and reflectance sensing,
-              allowing the robot to execute both translational and rotational corrections without requiring a
-              complex localization stack. Three HC-SR04 ultrasonic sensors provide coarse geometric awareness of
-              the starting enclosure and surrounding walls, while three TCRT5000 infrared sensors detect line
-              position and critical scoring thresholds during forward and reverse travel.
+              The presentation positions The Old Bear as a robot built around controlled, repeatable scoring rather
+              than aggressive shot-making. The design philosophy is explicit: move slowly, prioritize accuracy,
+              and treat pushing as more dependable than shooting. That philosophy drives both the mechanical layout
+              and the navigation logic described later in the deck.
             </p>
             <p>
-              The platform architecture is centered around an Arduino Mega, which coordinates sensor polling,
-              drive-state transitions, actuation timing, and safety interlocks within a deterministic control
-              loop. A turntable-based aiming mechanism and a linear pusher actuator convert navigational accuracy
-              into controlled stone deployment. The overall behavior is structured as a staged state machine:
-              orient within the start box, acquire the guide line, follow the path to the hog line, perform a
-              programmed scoring maneuver, and return to the initial region for reset.
+              From the extracted slides, the robot's operating cycle is straightforward and sequential. It first
+              uses ultrasonics to determine its orientation, repositions itself into the home corner, strafes to
+              the centre line, follows that line toward the hog line, deploys the puck with a pusher, then returns
+              to repeat the cycle after reloading. The review presentation frames this loop as the main technical
+              story of the project.
             </p>
+          </div>
+          <div class="callout-panel">
+            <span class="meta-label">Presentation Basis</span>
             <p>
-              This report documents the hardware and software decisions that enabled reliable arena traversal,
-              discusses the tradeoffs imposed by inexpensive sensors and time-based actuation, and presents a
-              framework for evaluating repeatability, robustness, and future system refinement. Detailed results,
-              media documentation, and the full Arduino control script are included to support replication and
-              post-project analysis.
+              Source slides recovered from the PDF: <strong>Final Project Review</strong>, <strong>The Team</strong>,
+              <strong>Our Bot</strong>, <strong>Overall Scoring Strategy</strong>, <strong>Outcomes</strong>, and
+              <strong>Lessons Learned</strong>.
             </p>
           </div>
         </section>
 
-        <section id="hardware" class="section">
+        <section id="team" class="section">
+          <div class="section-heading">
+            <p class="section-label">Section 2</p>
+            <h2>The Team</h2>
+          </div>
+          <div class="team-grid">
+            <article class="team-card">
+              <span class="meta-label">Team Member</span>
+              <h3>Sal</h3>
+              <p>MS ME</p>
+            </article>
+            <article class="team-card">
+              <span class="meta-label">Team Member</span>
+              <h3>Benji</h3>
+              <p>BS EE/CS</p>
+            </article>
+            <article class="team-card">
+              <span class="meta-label">Team Member</span>
+              <h3>Jacob</h3>
+              <p>MS ME</p>
+            </article>
+            <article class="team-card">
+              <span class="meta-label">Team Member</span>
+              <h3>Brandon</h3>
+              <p>BS ME</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="design" class="section">
           <div class="section-heading">
             <p class="section-label">Section 3</p>
-            <h2>Hardware Design</h2>
+            <h2>Our Bot</h2>
           </div>
 
-          <div class="subsection">
-            <h3>Chassis &amp; Mecanum Drivetrain</h3>
-            <div class="prose">
-              <p>
-                This subsection should describe the mechanical design rationale behind the chassis footprint,
-                mass distribution, wheel placement, and structural stiffness. Discuss how the mecanum wheel
-                geometry enables omnidirectional movement, why that mobility was essential for corner alignment
-                and line reacquisition, and how the final wheelbase dimensions were selected relative to arena
-                width constraints. Include manufacturing decisions, material choices, fastening methods, and any
-                observed mechanical tolerances that affected translational precision.
-              </p>
-              <p>
-                Expand this section with measured drivetrain performance, such as strafing drift, rotational bias,
-                wheel slip on competition surfaces, and the effect of battery voltage sag on motor response.
-                Academic reports benefit from quantified observations, so reserve space for tables summarizing
-                wheel diameter, motor free speed, estimated load current, and empirically tuned PWM ranges for
-                straight, diagonal, and in-place rotational maneuvers.
-              </p>
+          <div class="subsection split-layout">
+            <div>
+              <h3>CAD Assembly</h3>
+              <div class="prose">
+                <p>
+                  One of the slides is dedicated to CAD assembly imagery, indicating that the mechanical packaging
+                  and physical integration of the robot were central to the team's review story. While the slide
+                  itself is image-heavy rather than text-heavy, it anchors the presentation's transition from team
+                  introduction to design intent.
+                </p>
+                <p>
+                  In this site version, the CAD assembly portion is represented as a written bridge between the
+                  roster and the project philosophy: the robot is treated as a deliberately assembled platform whose
+                  mechanics exist to support accurate, repeated scoring cycles.
+                </p>
+              </div>
             </div>
+            <aside class="quote-panel">
+              <span class="meta-label">Slide Emphasis</span>
+              <p>
+                The presentation does not dwell on decorative detail. It moves quickly from assembly visuals to the
+                operating philosophy, which suggests the build was evaluated primarily by how reliably it executed
+                the scoring cycle.
+              </p>
+            </aside>
           </div>
 
           <div class="subsection">
-            <h3>Arduino Mega Processing</h3>
-            <div class="prose">
+            <h3>Design Philosophy</h3>
+            <ul class="bullet-list">
+              <li>Slow and steady wins the race.</li>
+              <li>Prioritise accuracy. Pushing &gt; shooting.</li>
+              <li>Mecanum drive allows for us to strafe rather than turn.</li>
+            </ul>
+            <div class="prose top-gap">
               <p>
-                Use this section to explain why the Arduino Mega was selected as the central controller, with
-                attention to available I/O, interrupt capability, timing determinism, and integration simplicity.
-                Document the mapping between sensors, motor drivers, and actuator channels, and clarify how the
-                firmware schedule balanced ultrasonic triggering, IR thresholding, and actuator sequencing without
-                introducing control latency. If any custom abstractions or helper functions were used to organize
-                the sketch, summarize their role here before referencing the full script in the appendix.
-              </p>
-              <p>
-                The final report should also discuss electrical architecture at the board level, including power
-                regulation, wiring management, shielding or grounding considerations, and any design constraints
-                introduced by simultaneous motor and sensor operation. Placeholder space is intentionally left for
-                a wiring diagram, pin allocation table, and notes on debugging methodology used during integration.
-              </p>
-            </div>
-          </div>
-
-          <div class="subsection">
-            <h3>3x HC-SR04 Ultrasonic Sensors</h3>
-            <div class="prose">
-              <p>
-                This subsection should document physical placement, mounting angle, and the expected measurement
-                envelope of each ultrasonic sensor. Explain how the left, right, and back sensors contributed to
-                orientation detection within the asymmetrical starting box, and outline the limitations caused by
-                specular reflections, cross-talk, minimum range effects, and inconsistent returns at oblique wall
-                angles. Include calibration procedures, timeout thresholds, and the practical meaning of invalid
-                readings in the context of the state machine.
-              </p>
-              <p>
-                Reserve room for plots or tables comparing nominal versus measured distance readings at multiple
-                headings and distances. Such data will strengthen the discussion of why a purely geometric yaw
-                estimate was rejected in favor of a robust heuristic approach using wall-presence patterns.
-              </p>
-            </div>
-          </div>
-
-          <div class="subsection">
-            <h3>3x TCRT5000 IR Sensors</h3>
-            <div class="prose">
-              <p>
-                Use this section to detail how the IR reflectance sensors were mounted relative to the floor,
-                centered about the robot body, and spaced to detect both line deviation and the hog-line stop
-                condition. Describe threshold tuning against the arena tape and background surface, noting how
-                ambient lighting, floor texture, and sensor standoff distance influenced the analog or digital
-                transition point. If filtering or hysteresis was required to prevent oscillation, document it here
-                and connect those choices to observed field behavior.
-              </p>
-              <p>
-                This is also the appropriate place to describe failure modes, such as intermittent clipping during
-                aggressive turns or false positives at tape edges, along with the procedural mitigations used in
-                testing. Placeholder language is intentionally formal so the final draft can absorb measured
-                threshold values and tuning notes directly.
-              </p>
-            </div>
-          </div>
-
-          <div class="subsection">
-            <h3>Turntable</h3>
-            <div class="prose">
-              <p>
-                Insert the mechanical and control description for the aiming turntable in this subsection.
-                Clarify whether the platform used a servo, geared motor, or indexed mechanism, and explain how the
-                turntable established repeatable shot directions despite backlash and time-based control
-                limitations. Academic detail should include rotational range, expected angular resolution, physical
-                hard stops, and any tuning performed to align commanded positions with observed stone trajectories.
-              </p>
-              <p>
-                Leave space here for diagrams showing the relationship between the turntable axis, pusher axis,
-                and robot centerline. If the final system supported multiple tactical shot positions, summarize the
-                shot taxonomy and the specific actuation sequence required to achieve each one.
-              </p>
-            </div>
-          </div>
-
-          <div class="subsection">
-            <h3>Linear Actuator (Pusher)</h3>
-            <div class="prose">
-              <p>
-                This subsection should describe the end-effector used to propel the curling stone, including the
-                actuator type, stroke length, guide mechanism, and structural interface with the frame. Explain
-                how the deployment timing was selected, what assumptions were made about stone friction and release
-                conditions, and how retraction was guaranteed prior to the return trajectory. If the actuator was
-                run open-loop, note the implications for repeatability and discuss any strategies used to bound
-                uncertainty.
-              </p>
-              <p>
-                The report should eventually include measured launch consistency, current draw considerations, and
-                any protective logic used to prevent stall or repeated activation. Placeholder space remains for a
-                timing diagram mapping drive halt, aim completion, extension, and retraction events.
+                These three points are the clearest design thesis in the deck. They explain why the robot is not
+                presented as a fast, dynamically aimed machine. Instead, it is framed as a controlled platform that
+                reduces turning complexity, favors stable contact-based scoring, and uses lateral motion to simplify
+                positioning in the arena.
               </p>
             </div>
           </div>
         </section>
 
-        <section id="software" class="section">
+        <section id="strategy" class="section">
           <div class="section-heading">
             <p class="section-label">Section 4</p>
-            <h2>Software Architecture &amp; Navigation</h2>
+            <h2>Overall Scoring Strategy</h2>
           </div>
-
-          <div class="subsection">
-            <h3>The "Smart Compass" Orientation Algorithm</h3>
-            <div class="prose">
-              <p>
-                Because calculating rotational yaw from a single ultrasonic sensor per side is highly susceptible to noise, the robot utilizes a "Smart Compass" algorithm based on the physical asymmetry of the arena's 16-inch starting box. Instead of mathematically calculating drift, the robot rotates in place and reads the geometry of the walls. If the Left and Back sensors read under 45cm (detecting the corner walls), but the Right sensor reads out of bounds (detecting the open 4-foot arena), the state machine locks the forward orientation. To counteract ultrasonic blindspots where sound waves bounce off at 45-degree angles, the rotational loop incorporates "momentum," allowing the chassis to coast through dead-zones (999 readings) until the flat walls are re-acquired. Once oriented, a diagonal Back-Left mecanum translation tucks the robot perfectly into the corner, requiring a 2-second continuous verification lock from both sensors to confirm a 0-degree starting heading.
-              </p>
-            </div>
+          <div class="prose intro-copy">
+            <p>
+              The strategy slide is the most operational part of the presentation. Rather than describing the robot
+              in abstract terms, it lays out the cycle step by step. Presented as a sequence, the robot's behavior
+              is easy to follow and clearly optimized for repeatability.
+            </p>
           </div>
-
-          <div class="subsection">
-            <h3>Differential IR Line Following</h3>
-            <div class="prose">
-              <p>
-                The robot navigates the arena using a 3-point TCRT5000 IR sensor array (Front-Left, Front-Right, Back-Center). To acquire the line, the robot strafes right until the Back-Center sensor crosses the tape's threshold. Once locked, it utilizes differential steering to drive down the track. If the Front-Left sensor clips the black tape, the right wheels accelerate while the left wheels decelerate, gently swinging the chassis back to center (and vice versa). This inverted logic is also applied when the robot reverses back to the starting box. The critical stop condition for the firing sequence occurs when both front sensors, which straddle the main line, simultaneously detect black tape, indicating the robot has perfectly intersected the perpendicular hog line.
-              </p>
-            </div>
-          </div>
-
-          <div class="subsection">
-            <h3>The Scoring State Machine</h3>
-            <div class="prose">
-              <p>
-                The master sequence operates strictly sequentially to prevent competing kinematics. Upon reaching the hog line, the drivetrain executes a stopAll() command to settle chassis momentum. The scoring function then activates a turntable to aim, followed by a linear actuator that drives forward at maximum PWM for 3 seconds to deploy the curling stone, and reverses for 3 seconds to retract. To execute diverse tactical shots, the master loop allows for programmed lateral offsets—strafing left or right for a set duration before firing—before returning to the center line to reverse back to the starting box.
-              </p>
-            </div>
-          </div>
+          <ol class="process-list">
+            <li class="process-step">
+              <h3>Determine Rotation</h3>
+              <p>Use ultrasonics to figure out rotation of bot, and rotate accordingly.</p>
+            </li>
+            <li class="process-step">
+              <h3>Return to the Home Corner</h3>
+              <p>Once facing forward, strafe left and move back to home to corner of arena.</p>
+            </li>
+            <li class="process-step">
+              <h3>Acquire the Centre Line</h3>
+              <p>Strafe right until the centre line.</p>
+            </li>
+            <li class="process-step">
+              <h3>Advance to the Hog Lines</h3>
+              <p>Follow centre line to hog lines.</p>
+            </li>
+            <li class="process-step">
+              <h3>Deploy the Scoring Mechanism</h3>
+              <p>Drop puck, extend pusher, retract pusher (repeat 3x).</p>
+            </li>
+            <li class="process-step">
+              <h3>Reverse the Path</h3>
+              <p>Follow centre line to back.</p>
+            </li>
+            <li class="process-step">
+              <h3>Re-seat in the Corner</h3>
+              <p>Strafe left till back in corner.</p>
+            </li>
+            <li class="process-step">
+              <h3>Reset and Repeat</h3>
+              <p>Wait 5 seconds, get reloaded, strafe to centre line, repeat.</p>
+            </li>
+          </ol>
         </section>
 
-        <section id="gallery" class="section">
+        <section id="outcomes" class="section">
           <div class="section-heading">
             <p class="section-label">Section 5</p>
-            <h2>Media Gallery</h2>
+            <h2>Outcomes</h2>
           </div>
-          <div class="prose intro-copy">
+          <ul class="bullet-list bullet-list--strong">
+            <li>Super reliable for first scoring cycle.</li>
+            <li>Pusher worked great.</li>
+            <li>
+              Line following left a bit to be desired, as the two front IR sensors were on the very edge of each
+              side of the robot.
+            </li>
+          </ul>
+          <div class="prose top-gap">
             <p>
-              Use the gallery below to document fabrication stages, subsystem close-ups, arena testing, and final
-              demonstrations. The layout accepts both static imagery and embedded videos, allowing the final ZIP
-              submission to remain visually rich while preserving a consistent academic presentation.
+              The presentation's results are notably candid. It claims a reliable first scoring cycle and a strong
+              pusher mechanism, but it also explicitly calls out the weakest area: line following. The reason is
+              not hand-waved. The deck ties that issue to front IR sensor placement at the edges of the chassis,
+              which is exactly the kind of concrete hardware-software interaction that belongs in a final review.
             </p>
-          </div>
-
-          <div class="gallery-grid">
-            <figure class="gallery-card">
-              <div class="media media--image placeholder-frame" role="img" aria-label="Placeholder image for chassis overview">
-                <div class="placeholder-frame__content">
-                  <span class="placeholder-kicker">Photo Placeholder</span>
-                  <strong>Chassis Overview</strong>
-                </div>
-              </div>
-              <figcaption>Figure 2. Full-system chassis view with labeled drivetrain and sensor locations.</figcaption>
-            </figure>
-
-            <figure class="gallery-card">
-              <div class="media media--image placeholder-frame" role="img" aria-label="Placeholder image for electronics layout">
-                <div class="placeholder-frame__content">
-                  <span class="placeholder-kicker">Photo Placeholder</span>
-                  <strong>Electronics Layout</strong>
-                </div>
-              </div>
-              <figcaption>Figure 3. Internal electronics organization, wiring paths, and controller placement.</figcaption>
-            </figure>
-
-            <figure class="gallery-card">
-              <div class="media media--video iframe-shell">
-                <div class="iframe-shell__toolbar">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </div>
-                <iframe
-                  srcdoc="<!doctype html><html><body style='margin:0;display:grid;place-items:center;height:100%;font-family:Inter,Arial,sans-serif;background:linear-gradient(135deg,#eff4f8,#dbe7f3);color:#1f2328;'><div style='text-align:center;padding:24px;'><strong style='display:block;font-size:20px;margin-bottom:8px;'>Video Placeholder</strong><span>Replace with navigation test footage</span></div></body></html>"
-                  title="Placeholder video embed for navigation testing"
-                  loading="lazy"
-                ></iframe>
-              </div>
-              <figcaption>Video 1. Arena navigation test run showing line acquisition and heading correction.</figcaption>
-            </figure>
-
-            <figure class="gallery-card">
-              <div class="media media--video iframe-shell">
-                <div class="iframe-shell__toolbar">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </div>
-                <iframe
-                  srcdoc="<!doctype html><html><body style='margin:0;display:grid;place-items:center;height:100%;font-family:Inter,Arial,sans-serif;background:linear-gradient(135deg,#eff4f8,#dbe7f3);color:#1f2328;'><div style='text-align:center;padding:24px;'><strong style='display:block;font-size:20px;margin-bottom:8px;'>Video Placeholder</strong><span>Replace with scoring sequence footage</span></div></body></html>"
-                  title="Placeholder video embed for scoring sequence"
-                  loading="lazy"
-                ></iframe>
-              </div>
-              <figcaption>Video 2. Scoring sequence capture showing turntable aiming and stone deployment.</figcaption>
-            </figure>
           </div>
         </section>
 
-        <section id="appendix" class="section">
+        <section id="lessons" class="section">
           <div class="section-heading">
             <p class="section-label">Section 6</p>
-            <h2>Code Appendix</h2>
+            <h2>Lessons Learned</h2>
           </div>
-          <div class="prose intro-copy">
+          <div class="callout-panel callout-panel--compact">
+            <span class="meta-label">Key Errors</span>
+            <p>The final slide groups the team's retrospective under a direct heading: key errors.</p>
+          </div>
+          <ul class="bullet-list">
+            <li>Encoders on the drivetrain motors were not needed; the team eventually went for a sensor-based strategy.</li>
+            <li>Encoders on the turntable <strong>were</strong> needed and had to be calibrated based on battery voltage.</li>
+            <li>Before the tournament, the team never once tested multiple scoring cycles; the presentation calls this a mistake.</li>
+            <li>Assembly bottlenecks such as 3D printing and quick adjustments needed to be addressed much earlier.</li>
+          </ul>
+          <div class="prose top-gap">
             <p>
-              Replace the sample listing below with the final master Arduino C++ script. The styling is prepared
-              for dark-theme presentation using semantic span classes for keywords, comments, types, functions,
-              and string literals.
+              This closing slide is the strongest evidence that the review deck is honest about tradeoffs and process
+              failures, not just final performance. It distinguishes between subsystems that looked necessary but were
+              ultimately unnecessary, subsystems that proved more critical than expected, and schedule problems that
+              compounded integration risk late in the project.
             </p>
-          </div>
-
-          <div class="code-panel">
-            <div class="code-panel__header">
-              <span>Master Arduino Script</span>
-              <span>`.ino` / C++</span>
-            </div>
-            <pre><code><span class="token-comment">// BOTspiel master control sketch placeholder</span>
-<span class="token-keyword">const</span> <span class="token-type">int</span> frontLeftIRPin <span class="token-operator">=</span> <span class="token-number">22</span>;
-<span class="token-keyword">const</span> <span class="token-type">int</span> frontRightIRPin <span class="token-operator">=</span> <span class="token-number">23</span>;
-<span class="token-keyword">const</span> <span class="token-type">int</span> backCenterIRPin <span class="token-operator">=</span> <span class="token-number">24</span>;
-
-<span class="token-keyword">void</span> <span class="token-function">setup</span>() {
-  Serial.<span class="token-function">begin</span>(<span class="token-number">115200</span>);
-  <span class="token-comment">// Initialize motors, sensors, and state variables here.</span>
-}
-
-<span class="token-keyword">void</span> <span class="token-function">loop</span>() {
-  <span class="token-comment">// Replace with the final sequential navigation and scoring state machine.</span>
-  Serial.<span class="token-function">println</span>(<span class="token-string">"Insert final BOTspiel control script."</span>);
-  <span class="token-function">delay</span>(<span class="token-number">1000</span>);
-}</code></pre>
           </div>
         </section>
       </main>
