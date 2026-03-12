@@ -41,12 +41,13 @@
             <a href="#team" class="nav-link">The Team</a>
             <a href="#design" class="nav-link">Our Bot</a>
             <a href="#strategy" class="nav-link">Scoring Strategy</a>
+            <a href="#software" class="nav-link">Tournament Code</a>
             <a href="#outcomes" class="nav-link">Outcomes</a>
             <a href="#lessons" class="nav-link">Lessons Learned</a>
           </nav>
 
           <div class="sidebar__footer">
-            <p>Adapted from `ME210_Team14_FinalReviewPresentation.pdf`</p>
+            <p>ME 210 Final Project Site</p>
             <p>Vanilla HTML, CSS, and JavaScript</p>
           </div>
         </div>
@@ -59,9 +60,9 @@
             <h2>The Old Bear</h2>
             <p class="hero-subtitle">Team 14 · ME 210 · Winter 2026</p>
             <p class="hero-intro">
-              This site translates the six-slide final review presentation into a readable single-page report.
-              The content below is grounded in the presentation deck: team roster, bot philosophy, overall
-              scoring strategy, observed outcomes, and the main lessons the team took away from the build.
+              The Old Bear is a repeatability-first ME 210 robot built around controlled motion, lateral
+              alignment, and a sequential scoring cycle. The system favors accurate positioning, stable first-pass
+              execution, and contact-based deployment over aggressive shot-making.
             </p>
           </div>
 
@@ -69,7 +70,7 @@
             <article class="info-card">
               <span class="meta-label">Project</span>
               <h3>The Old Bear</h3>
-              <p>Team 14's ME 210 robot project presented in the final review deck.</p>
+              <p>Team 14's final project robot for ME 210, designed for repeatable arena navigation and scoring.</p>
             </article>
             <article class="info-card">
               <span class="meta-label">Core Motion</span>
@@ -82,9 +83,9 @@
               <p>The scoring cycle combines ultrasonic orientation with centre-line tracking to the hog line.</p>
             </article>
             <article class="info-card">
-              <span class="meta-label">Review Focus</span>
-              <h3>Reliability Over Flair</h3>
-              <p>The presentation consistently emphasizes accuracy, repeatability, and stable first-cycle scoring.</p>
+              <span class="meta-label">Tournament Loop</span>
+              <h3>Three Scoring Passes</h3>
+              <p>The final code attempts a center shot, a slight right offset, and a slight left offset.</p>
             </article>
           </div>
         </section>
@@ -96,25 +97,27 @@
           </div>
           <div class="prose">
             <p>
-              The presentation positions The Old Bear as a robot built around controlled, repeatable scoring rather
-              than aggressive shot-making. The design philosophy is explicit: move slowly, prioritize accuracy,
-              and treat pushing as more dependable than shooting. That philosophy drives both the mechanical layout
-              and the navigation logic described later in the deck.
+              The Old Bear was designed as a controlled scoring platform rather than a high-variance shooter. Its
+              operating philosophy is straightforward: move slowly, prioritize accuracy, and rely on pushing as a
+              more dependable scoring method than shooting. That philosophy shaped both the drivetrain choice and
+              the structure of the scoring cycle.
             </p>
             <p>
-              From the extracted slides, the robot's operating cycle is straightforward and sequential. It first
-              uses ultrasonics to determine its orientation, repositions itself into the home corner, strafes to
-              the centre line, follows that line toward the hog line, deploys the puck with a pusher, then returns
-              to repeat the cycle after reloading. The review presentation frames this loop as the main technical
-              story of the project.
+              The robot follows a deliberate sequence. It uses ultrasonics to determine orientation, repositions
+              itself into the home corner, strafes to the centre line, follows that line toward the hog line,
+              deploys the puck with the pusher, and then returns to reset for another cycle. The result is a
+              system built around predictable state transitions instead of reactive improvisation.
+            </p>
+            <p>
+              In tournament code, that sequence was implemented as a concrete multi-cycle loop rather than a single
+              scoring run. After the first centered attempt, the robot reloaded, reacquired the line, and then
+              executed additional shots with short timed strafes to the right and left before firing again.
             </p>
           </div>
           <div class="callout-panel">
-            <span class="meta-label">Presentation Basis</span>
+            <span class="meta-label">System Focus</span>
             <p>
-              Source slides recovered from the PDF: <strong>Final Project Review</strong>, <strong>The Team</strong>,
-              <strong>Our Bot</strong>, <strong>Overall Scoring Strategy</strong>, <strong>Outcomes</strong>, and
-              <strong>Lessons Learned</strong>.
+              Accuracy first. Strafing over turning. Pushing over shooting. Reliable cycles over risky one-off plays.
             </p>
           </div>
         </section>
@@ -159,24 +162,22 @@
               <h3>CAD Assembly</h3>
               <div class="prose">
                 <p>
-                  One of the slides is dedicated to CAD assembly imagery, indicating that the mechanical packaging
-                  and physical integration of the robot were central to the team's review story. While the slide
-                  itself is image-heavy rather than text-heavy, it anchors the presentation's transition from team
-                  introduction to design intent.
+                  The robot was assembled as an integrated platform whose packaging supports a simple and repeatable
+                  motion plan. The chassis, drivetrain, sensing layout, and pusher mechanism work together to make
+                  lateral corrections easy and to keep the scoring cycle consistent from the same starting region.
                 </p>
                 <p>
-                  In this site version, the CAD assembly portion is represented as a written bridge between the
-                  roster and the project philosophy: the robot is treated as a deliberately assembled platform whose
-                  mechanics exist to support accurate, repeated scoring cycles.
+                  Mechanically, the system is not optimized for flashy movement. It is optimized for controlled
+                  repositioning, clean line acquisition, and repeatable puck deployment. That makes the physical
+                  assembly directly responsible for the robot's scoring reliability.
                 </p>
               </div>
             </div>
             <aside class="quote-panel">
-              <span class="meta-label">Slide Emphasis</span>
+              <span class="meta-label">Design Intent</span>
               <p>
-                The presentation does not dwell on decorative detail. It moves quickly from assembly visuals to the
-                operating philosophy, which suggests the build was evaluated primarily by how reliably it executed
-                the scoring cycle.
+                The mechanical design supports the control strategy: minimize unnecessary turning, make alignment
+                corrections laterally, and convert good positioning into points with a dependable pusher.
               </p>
             </aside>
           </div>
@@ -190,10 +191,9 @@
             </ul>
             <div class="prose top-gap">
               <p>
-                These three points are the clearest design thesis in the deck. They explain why the robot is not
-                presented as a fast, dynamically aimed machine. Instead, it is framed as a controlled platform that
-                reduces turning complexity, favors stable contact-based scoring, and uses lateral motion to simplify
-                positioning in the arena.
+                These principles define the entire system. The robot is deliberately conservative in motion, uses
+                strafing to reduce turning complexity, and turns accurate positioning into points through contact-
+                based scoring. The philosophy is less about maximum speed and more about removing avoidable error.
               </p>
             </div>
           </div>
@@ -206,9 +206,9 @@
           </div>
           <div class="prose intro-copy">
             <p>
-              The strategy slide is the most operational part of the presentation. Rather than describing the robot
-              in abstract terms, it lays out the cycle step by step. Presented as a sequence, the robot's behavior
-              is easy to follow and clearly optimized for repeatability.
+              The scoring loop is intentionally sequential. Each movement prepares the robot for the next one,
+              which helps contain error, simplifies control, and makes repeated cycles more reliable from the same
+              starting condition.
             </p>
           </div>
           <ol class="process-list">
@@ -247,9 +247,88 @@
           </ol>
         </section>
 
-        <section id="outcomes" class="section">
+        <section id="software" class="section">
           <div class="section-heading">
             <p class="section-label">Section 5</p>
+            <h2>Tournament Code Implementation</h2>
+          </div>
+
+          <div class="subsection">
+            <h3>Controller Structure</h3>
+            <div class="prose">
+              <p>
+                The tournament robot ran from a single Arduino Mega master script. The code defines four drivetrain
+                PWM channels, dedicated turntable and pusher outputs, three IR sensors, and three ultrasonic
+                sensors. `setup()` initializes all drivetrain and actuator outputs, configures the ultrasonic pins,
+                stops the system, and exposes a serial command interface for manual testing.
+              </p>
+              <p>
+                Although manual commands remained available through serial input, the tournament behavior was driven
+                directly from `loop()`. The autonomous path called `squareToWall()`, `alignToLine()`, `score()`,
+                and `returnToSquare()`, then repeated with timed lateral offsets for later scoring attempts.
+              </p>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <h3>Key Thresholds and Speeds</h3>
+            <ul class="bullet-list">
+              <li>`IR_THRESH` is set to `200` for tape detection.</li>
+              <li>`squareToWall()` uses a `45 cm` ultrasonic threshold and temporarily reduces turn speed to `130 PWM` for precision rotation.</li>
+              <li>`alignToLine()` begins with a slow right strafe at roughly `76 PWM`, then follows the line at `120 PWM`.</li>
+              <li>Line-follow corrections use differential wheel commands of `30` and `100 PWM` to steer back onto the line.</li>
+              <li>`returnToSquare()` reverses at `90 PWM` and finishes with a `120 PWM` left strafe into the corner.</li>
+            </ul>
+          </div>
+
+          <div class="subsection split-layout">
+            <div>
+              <h3>Orientation and Line Logic</h3>
+              <div class="prose">
+                <p>
+                  `squareToWall()` implements the core ultrasonic orientation routine. It reads the left, right,
+                  and back sensors, classifies the robot's heading from wall visibility, and preserves a `turnDir`
+                  state so the chassis keeps rotating through ultrasonic blind spots instead of stalling on `999`
+                  timeout readings.
+                </p>
+                <p>
+                  Once forward orientation is locked, the code transitions into a back-left tuck toward the corner.
+                  `alignToLine()` then strafes right until the back-center IR sensor crosses the threshold, after
+                  which the front-left and front-right sensors handle differential line following. The hog line stop
+                  condition is explicit: both front sensors must simultaneously detect black tape.
+                </p>
+              </div>
+            </div>
+            <aside class="quote-panel">
+              <span class="meta-label">Code Reality</span>
+              <p>
+                The code matches the strategy at a low level: wall-based orientation, center-line acquisition,
+                front-sensor stop detection, and a clean transition back into the square after scoring.
+              </p>
+            </aside>
+          </div>
+
+          <div class="subsection">
+            <h3>Scoring and Multi-Cycle Sequence</h3>
+            <div class="prose">
+              <p>
+                The actual `score()` function is more specific than the high-level summary. For each scoring cycle,
+                the turn motor is driven at full PWM for `1.5 seconds`, the pusher extends at full PWM for `3
+                seconds`, and the pusher retracts at full PWM for another `3 seconds`. That inner cycle is repeated
+                three times.
+              </p>
+              <p>
+                The top-level tournament loop then executes three attack positions: one centered scoring pass, one
+                pass with a short right strafe of `300 ms`, and one pass with a short left strafe of `300 ms`. Each
+                of the later passes is separated by a five-second reload delay and a fresh line-acquisition phase.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="outcomes" class="section">
+          <div class="section-heading">
+            <p class="section-label">Section 6</p>
             <h2>Outcomes</h2>
           </div>
           <ul class="bullet-list bullet-list--strong">
@@ -262,35 +341,35 @@
           </ul>
           <div class="prose top-gap">
             <p>
-              The presentation's results are notably candid. It claims a reliable first scoring cycle and a strong
-              pusher mechanism, but it also explicitly calls out the weakest area: line following. The reason is
-              not hand-waved. The deck ties that issue to front IR sensor placement at the edges of the chassis,
-              which is exactly the kind of concrete hardware-software interaction that belongs in a final review.
+              The results show a system with one strong core behavior and one clear weakness. The first scoring
+              cycle was reliable and the pusher performed well, but line following remained less precise than
+              desired. The main issue was sensor placement at the outer edges of the front of the robot, which
+              reduced the system's ability to stay centered cleanly.
             </p>
           </div>
         </section>
 
         <section id="lessons" class="section">
           <div class="section-heading">
-            <p class="section-label">Section 6</p>
+            <p class="section-label">Section 7</p>
             <h2>Lessons Learned</h2>
           </div>
           <div class="callout-panel callout-panel--compact">
             <span class="meta-label">Key Errors</span>
-            <p>The final slide groups the team's retrospective under a direct heading: key errors.</p>
+            <p>Several late-stage issues came from unnecessary hardware, missing calibration, limited cycle testing, and delayed assembly decisions.</p>
           </div>
           <ul class="bullet-list">
             <li>Encoders on the drivetrain motors were not needed; the team eventually went for a sensor-based strategy.</li>
             <li>Encoders on the turntable <strong>were</strong> needed and had to be calibrated based on battery voltage.</li>
-            <li>Before the tournament, the team never once tested multiple scoring cycles; the presentation calls this a mistake.</li>
+            <li>Before the tournament, the team never once tested multiple scoring cycles, which left an important system-level failure unexposed until late.</li>
             <li>Assembly bottlenecks such as 3D printing and quick adjustments needed to be addressed much earlier.</li>
           </ul>
           <div class="prose top-gap">
             <p>
-              This closing slide is the strongest evidence that the review deck is honest about tradeoffs and process
-              failures, not just final performance. It distinguishes between subsystems that looked necessary but were
-              ultimately unnecessary, subsystems that proved more critical than expected, and schedule problems that
-              compounded integration risk late in the project.
+              The main lessons are about scope discipline and integration timing. Some instrumentation turned out to
+              be unnecessary, other sensing proved more critical than expected, and the lack of repeated full-cycle
+              testing hid important issues. On top of that, assembly bottlenecks reduced iteration time when the
+              team most needed it.
             </p>
           </div>
         </section>
