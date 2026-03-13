@@ -39,7 +39,8 @@
             <a href="#hero" class="nav-link active">Overview</a>
             <a href="#summary" class="nav-link">Project Summary</a>
             <a href="#team" class="nav-link">The Team</a>
-            <a href="#design" class="nav-link">Our Bot</a>
+            <a href="#design" class="nav-link">Hardware Design</a>
+            <a href="#calculations" class="nav-link">Calculations</a>
             <a href="#strategy" class="nav-link">Scoring Strategy</a>
             <a href="#software" class="nav-link">Tournament Code</a>
             <a href="#outcomes" class="nav-link">Outcomes</a>
@@ -60,32 +61,43 @@
             <h2>The Old Bear</h2>
             <p class="hero-subtitle">Team 14 · ME 210 · Winter 2026</p>
             <p class="hero-intro">
-              The Old Bear is a repeatability-first ME 210 robot built around controlled motion, lateral
-              alignment, and a sequential scoring cycle. The system favors accurate positioning, stable first-pass
-              execution, and contact-based deployment over aggressive shot-making.
+              The Old Bear uses a four-wheel mecanum drivetrain, a rack-and-pinion pusher, and a turntable that
+              stores three pucks and drops them in front of the pusher. The system was built around controlled and
+              predictable puck delivery rather than a shooting-based approach.
             </p>
           </div>
+
+          <figure class="hero-photo media-card">
+            <img
+              src="real image.png"
+              alt="The Old Bear robot photographed on the competition surface."
+            />
+            <figcaption>
+              The Old Bear in tournament-ready configuration, showing the mecanum platform and front-mounted
+              delivery hardware.
+            </figcaption>
+          </figure>
 
           <div class="hero-grid" aria-label="Project summary cards">
             <article class="info-card">
               <span class="meta-label">Project</span>
               <h3>The Old Bear</h3>
-              <p>Team 14's final project robot for ME 210, designed for repeatable arena navigation and scoring.</p>
+              <p>Team 14's final project robot for ME 210.</p>
             </article>
             <article class="info-card">
-              <span class="meta-label">Core Motion</span>
-              <h3>Mecanum Strafing</h3>
-              <p>The drivetrain was selected to let the robot strafe instead of turning for alignment.</p>
+              <span class="meta-label">Drivetrain</span>
+              <h3>Four Mecanum Wheels</h3>
+              <p>Once aligned in the correct direction, the robot can move freely without rotational movements.</p>
             </article>
             <article class="info-card">
-              <span class="meta-label">Navigation</span>
-              <h3>Ultrasonics + Line Follow</h3>
-              <p>The scoring cycle combines ultrasonic orientation with centre-line tracking to the hog line.</p>
+              <span class="meta-label">Pusher</span>
+              <h3>Rack and Pinion</h3>
+              <p>The pusher takes advantage of the 7-inch extension rule and pushes the puck out in a controlled way.</p>
             </article>
             <article class="info-card">
-              <span class="meta-label">Tournament Loop</span>
-              <h3>Three Scoring Passes</h3>
-              <p>The final code attempts a center shot, a slight right offset, and a slight left offset.</p>
+              <span class="meta-label">Storage</span>
+              <h3>Three-Puck Turntable</h3>
+              <p>The turntable stores three pucks and drops each puck into position in front of the pusher.</p>
             </article>
           </div>
         </section>
@@ -97,28 +109,24 @@
           </div>
           <div class="prose">
             <p>
-              The Old Bear was designed as a controlled scoring platform rather than a high-variance shooter. Its
-              operating philosophy is straightforward: move slowly, prioritize accuracy, and rely on pushing as a
-              more dependable scoring method than shooting. That philosophy shaped both the drivetrain choice and
-              the structure of the scoring cycle.
+              For the drivetrain of our robot, we chose the simplest approach by using four Mecanum wheels. With
+              this type of wheel, once the robot is aligned in the correct direction (facing the center of the
+              playground), it can move freely without needing to perform any rotational movements.
             </p>
             <p>
-              The robot follows a deliberate sequence. It uses ultrasonics to determine orientation, repositions
-              itself into the home corner, strafes to the centre line, follows that line toward the hog line,
-              deploys the puck with the pusher, and then returns to reset for another cycle. The result is a
-              system built around predictable state transitions instead of reactive improvisation.
+              For puck delivery, we moved away from shooting and slide mechanisms because they showed instability.
+              Instead, we designed a turntable-fed pusher system so that puck release would be more controlled and
+              predictable.
             </p>
             <p>
-              In tournament code, that sequence was implemented as a concrete multi-cycle loop rather than a single
-              scoring run. After the first centered attempt, the robot reloaded, reacquired the line, and then
-              executed additional shots with short timed strafes to the right and left before firing again.
+              In tournament code, the robot squares to the wall with ultrasonics, acquires the center line, follows
+              that line to the hog line, actuates the scoring mechanism, and then returns to the square to reload
+              before later attempts.
             </p>
           </div>
           <div class="callout-panel">
-            <span class="meta-label">System Focus</span>
-            <p>
-              Accuracy first. Strafing over turning. Pushing over shooting. Reliable cycles over risky one-off plays.
-            </p>
+            <span class="meta-label">Autonomous Sequence</span>
+            <p><code>squareToWall()</code> → <code>alignToLine()</code> → <code>score()</code> → <code>returnToSquare()</code></p>
           </div>
         </section>
 
@@ -154,61 +162,214 @@
         <section id="design" class="section">
           <div class="section-heading">
             <p class="section-label">Section 3</p>
-            <h2>Our Bot</h2>
+            <h2>Hardware Design</h2>
+          </div>
+
+          <figure class="media-card media-card--wide subsection">
+            <img
+              src="cad image.png"
+              alt="CAD assembly render of The Old Bear robot."
+              loading="lazy"
+            />
+            <figcaption>
+              CAD assembly of the robot showing the drivetrain and delivery system layout.
+            </figcaption>
+          </figure>
+
+          <div class="subsection">
+            <h3>Drivetrain</h3>
+            <div class="prose">
+              <p>
+                For the drivetrain of our robot, we chose the simplest approach by using four Mecanum wheels. With
+                this type of wheel, once the robot is aligned in the correct direction (facing the center of the
+                playground), it can move freely without needing to perform any rotational movements.
+              </p>
+            </div>
           </div>
 
           <div class="subsection split-layout">
             <div>
-              <h3>CAD Assembly</h3>
+              <h3>Pusher Mechanism</h3>
               <div class="prose">
                 <p>
-                  The robot was assembled as an integrated platform whose packaging supports a simple and repeatable
-                  motion plan. The chassis, drivetrain, sensing layout, and pusher mechanism work together to make
-                  lateral corrections easy and to keep the scoring cycle consistent from the same starting region.
+                  At first, we considered using a shooting or slide mechanism, but both mechanisms showed some
+                  instability. Because of this, we decided to choose a design that would be more controlled and
+                  predictable. Therefore, we decided to design a pusher to push the puck out, taking advantage of
+                  the rule that allows up to 7 inches of extension.
                 </p>
                 <p>
-                  Mechanically, the system is not optimized for flashy movement. It is optimized for controlled
-                  repositioning, clean line acquisition, and repeatable puck deployment. That makes the physical
-                  assembly directly responsible for the robot's scoring reliability.
+                  Initially, we planned to use a lead screw to convert rotational motion into linear motion.
+                  However, we later switched to a rack and pinion mechanism because this design is simpler while
+                  also allowing the pusher to move faster.
+                </p>
+                <p>
+                  After deciding to use rack and pinion, we directly attached the pusher head to the rack. We also
+                  purchased a Linear Rail Guide with a Carriage Block to connect our base with the rack. This helps
+                  reduce friction, enable smoother movement, and constrain the pusher to move only in one
+                  direction.
                 </p>
               </div>
             </div>
-            <aside class="quote-panel">
-              <span class="meta-label">Design Intent</span>
-              <p>
-                The mechanical design supports the control strategy: minimize unnecessary turning, make alignment
-                corrections laterally, and convert good positioning into points with a dependable pusher.
-              </p>
-            </aside>
+            <figure class="media-card">
+              <img
+                src="rack and pinion(pusher).png"
+                alt="Rack and pinion pusher mechanism used on The Old Bear."
+                loading="lazy"
+              />
+              <figcaption>
+                Rack-and-pinion pusher assembly used to extend and retract during scoring.
+              </figcaption>
+            </figure>
+          </div>
+
+          <div class="subsection split-layout">
+            <div>
+              <h3>Turntable</h3>
+              <div class="prose">
+                <p>
+                  After designing the pusher mechanism, we needed another mechanism to store three pucks and allow
+                  them to drop in front of the pusher. We determined that the simplest solution would be to use a
+                  turntable.
+                </p>
+                <p>
+                  With this design, we only need a motor with sufficient torque to rotate the turntable while
+                  holding three pucks, and a hole cut into the turntable so that each puck can drop into position.
+                  The calculation for the required motor torque is provided at the end of this section for
+                  reference.
+                </p>
+              </div>
+            </div>
+            <figure class="media-card">
+              <img
+                src="turntable(dropper).png"
+                alt="Turntable and dropper mechanism used on The Old Bear."
+                loading="lazy"
+              />
+              <figcaption>
+                Turntable mechanism used to hold three pucks and drop each puck in front of the pusher.
+              </figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section id="calculations" class="section">
+          <div class="section-heading">
+            <p class="section-label">Section 4</p>
+            <h2>Engineering Calculations</h2>
           </div>
 
           <div class="subsection">
-            <h3>Design Philosophy</h3>
-            <ul class="bullet-list">
-              <li>Slow and steady wins the race.</li>
-              <li>Prioritise accuracy. Pushing &gt; shooting.</li>
-              <li>Mecanum drive allows for us to strafe rather than turn.</li>
-            </ul>
-            <div class="prose top-gap">
-              <p>
-                These principles define the entire system. The robot is deliberately conservative in motion, uses
-                strafing to reduce turning complexity, and turns accurate positioning into points through contact-
-                based scoring. The philosophy is less about maximum speed and more about removing avoidable error.
-              </p>
+            <h3>Motor Specing of Rack and Pinion Puck Pusher</h3>
+            <div class="calc-grid">
+              <article class="calc-card">
+                <h4>Given / Assumptions</h4>
+                <ul class="compact-list">
+                  <li>Puck weight: <strong>W ≈ 0.5 lbf</strong></li>
+                  <li>Puck material: <strong>metal</strong></li>
+                  <li>Surface material: <strong>painted wood</strong></li>
+                  <li>Required linear travel: <strong>x = 7 in</strong></li>
+                  <li>Mechanism: <strong>rack and pinion driving a scoop</strong></li>
+                </ul>
+              </article>
+
+              <article class="calc-card">
+                <h4>1. Normal Force on Puck</h4>
+                <p class="math-line">N = W = 0.5 lbf</p>
+                <h4>2. Friction Force Required to Move the Puck</h4>
+                <p class="math-line">μ<sub>s</sub> ≈ 0.25 - 0.45</p>
+                <p class="math-line">μ<sub>k</sub> ≈ 0.20 - 0.35</p>
+                <p class="math-line">F<sub>s,max</sub> = μ<sub>s</sub>N ≈ (0.25 - 0.45)(0.5) ≈ 0.125 - 0.225 lbf</p>
+                <p class="math-line">F<sub>k,max</sub> = μ<sub>k</sub>N ≈ (0.20 - 0.35)(0.5) ≈ 0.10 - 0.175 lbf</p>
+              </article>
+
+              <article class="calc-card">
+                <h4>3. Design Force</h4>
+                <p class="math-line">F<sub>design</sub> = 0.5 lbf</p>
+                <h4>4. Required Motor Torque</h4>
+                <p class="math-line">T = F<sub>push</sub> · r<sub>p</sub></p>
+                <p class="math-line">r<sub>p</sub> = 0.5 in to 1 in</p>
+                <p class="math-line">T = 0.5 in · 0.5 lbf = 0.25 lbf·in</p>
+                <p class="math-line">1 lbf·in = 16 oz·in</p>
+                <p class="math-line">T = 0.25 × 16 = 4 oz·in</p>
+              </article>
+
+              <article class="calc-card">
+                <h4>5. Practical Torque Requirement</h4>
+                <p class="math-line">T<sub>target</sub> = 15 - 30 oz·in</p>
+                <p class="math-line">T<sub>target</sub> ≈ 1.1 - 2.2 kg·cm</p>
+                <h4>6. Pinion Rotation Needed for 7 in Travel</h4>
+                <p class="math-line">rev = x / (2πr<sub>p</sub>)</p>
+                <p class="math-line">If r<sub>p</sub> = 0.5 in, rev = 7 / (2π(0.5)) = 7/π ≈ 2.23 rev</p>
+                <p class="math-line">Circumference ≈ 3.14 in/rev</p>
+                <p class="math-line">At 60 RPM, v ≈ 3.14 in/s</p>
+                <p class="math-line">t ≈ 7 / 3.14 ≈ 2.2 s</p>
+              </article>
+
+              <article class="calc-card calc-card--full">
+                <h4>Selected Motor Target</h4>
+                <ul class="compact-list">
+                  <li>6 - 12 V voltage motor</li>
+                  <li>50 - 60 RPM</li>
+                  <li>Torque ≥ 2 kg·cm</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <h3>Drive Train Motor Spec.</h3>
+            <div class="calc-grid">
+              <article class="calc-card">
+                <h4>Inputs</h4>
+                <ul class="compact-list">
+                  <li>r<sub>wheel</sub> = <strong>48.5 mm</strong> (d = 97 mm) → mecanum</li>
+                  <li>V<sub>battery</sub> = <strong>14.4 V nominal</strong> → <strong>12 V realistically</strong></li>
+                  <li>M<sub>robot</sub> ≈ <strong>5 kg</strong> at max</li>
+                </ul>
+              </article>
+
+              <article class="calc-card">
+                <h4>Mass Notes</h4>
+                <ul class="compact-list">
+                  <li>Battery: 0.38 kg - 0.45 kg</li>
+                  <li>Motor: ≈ 0.235 kg</li>
+                  <li>Wheels total: 1 lb = 0.45 kg</li>
+                  <li>Wheel diameter: 97 mm / 3.8 in</li>
+                  <li>Electronics include sensors, Arduino Uno x2, 2 motor drivers, wires / breadboard, and mounts</li>
+                  <li>Delivery includes 2 motors and 30 prints</li>
+                </ul>
+              </article>
+
+              <article class="calc-card">
+                <h4>Mass Substitution</h4>
+                <p class="math-line">M<sub>robot</sub> = 2m<sub>battery</sub> + 4m<sub>motor</sub> + 4m<sub>wheels</sub> + 3m<sub>puck</sub> + m<sub>chassis</sub> + m<sub>electronics</sub> + m<sub>delivery</sub></p>
+                <p class="math-line">= 2(0.45 kg) + 4(0.235 kg) + 0.45 kg + 3(0.227 kg) + m<sub>chassis</sub> + m<sub>electronics</sub> + m<sub>delivery</sub></p>
+                <p class="math-line">= 2.971 kg + m<sub>delivery</sub> + m<sub>chassis</sub> + m<sub>electronics</sub></p>
+                <p class="math-line">Design estimate: M<sub>robot</sub> ≈ 5 kg</p>
+              </article>
+
+              <article class="calc-card">
+                <h4>Motor Selection Check</h4>
+                <p class="math-line">Want 150 - 300 RPM with ≈ 5 kg·cm torque total among wheels</p>
+                <p class="math-line">Given 130 RPM, 1.2 kg·cm rated torque, 12 V motor</p>
+                <p class="math-line">τ = 1.2 kg·cm ⇒ 0.118 N·m ⇒ 4.8 kg·cm as a system</p>
+                <p class="math-line">F<sub>wheel</sub> = τ / r<sub>wheel</sub> = 0.118 N·m / 0.0485 m ≈ 2.4 N per wheel</p>
+                <p class="math-line">All 4 wheels: 9.7 N</p>
+                <p class="math-line">a ≈ F / m ≈ 9.7 N / 5 kg = 1.94 m/s² ⇒ ok</p>
+              </article>
             </div>
           </div>
         </section>
 
         <section id="strategy" class="section">
           <div class="section-heading">
-            <p class="section-label">Section 4</p>
+            <p class="section-label">Section 5</p>
             <h2>Overall Scoring Strategy</h2>
           </div>
           <div class="prose intro-copy">
             <p>
-              The scoring loop is intentionally sequential. Each movement prepares the robot for the next one,
-              which helps contain error, simplifies control, and makes repeated cycles more reliable from the same
-              starting condition.
+              The scoring loop is implemented as a sequential set of alignment, line acquisition, scoring, and
+              reset behaviors.
             </p>
           </div>
           <ol class="process-list">
@@ -249,7 +410,7 @@
 
         <section id="software" class="section">
           <div class="section-heading">
-            <p class="section-label">Section 5</p>
+            <p class="section-label">Section 6</p>
             <h2>Tournament Code Implementation</h2>
           </div>
 
@@ -259,13 +420,13 @@
               <p>
                 The tournament robot ran from a single Arduino Mega master script. The code defines four drivetrain
                 PWM channels, dedicated turntable and pusher outputs, three IR sensors, and three ultrasonic
-                sensors. `setup()` initializes all drivetrain and actuator outputs, configures the ultrasonic pins,
+                sensors. <code>setup()</code> initializes all drivetrain and actuator outputs, configures the ultrasonic pins,
                 stops the system, and exposes a serial command interface for manual testing.
               </p>
               <p>
                 Although manual commands remained available through serial input, the tournament behavior was driven
-                directly from `loop()`. The autonomous path called `squareToWall()`, `alignToLine()`, `score()`,
-                and `returnToSquare()`, then repeated with timed lateral offsets for later scoring attempts.
+                directly from <code>loop()</code>. The autonomous path called <code>squareToWall()</code>, <code>alignToLine()</code>, <code>score()</code>,
+                and <code>returnToSquare()</code>, then repeated with timed lateral offsets for later scoring attempts.
               </p>
             </div>
           </div>
@@ -273,11 +434,11 @@
           <div class="subsection">
             <h3>Key Thresholds and Speeds</h3>
             <ul class="bullet-list">
-              <li>`IR_THRESH` is set to `200` for tape detection.</li>
-              <li>`squareToWall()` uses a `45 cm` ultrasonic threshold and temporarily reduces turn speed to `130 PWM` for precision rotation.</li>
-              <li>`alignToLine()` begins with a slow right strafe at roughly `76 PWM`, then follows the line at `120 PWM`.</li>
-              <li>Line-follow corrections use differential wheel commands of `30` and `100 PWM` to steer back onto the line.</li>
-              <li>`returnToSquare()` reverses at `90 PWM` and finishes with a `120 PWM` left strafe into the corner.</li>
+              <li><code>IR_THRESH</code> is set to <code>200</code> for tape detection.</li>
+              <li><code>squareToWall()</code> uses a <code>45 cm</code> ultrasonic threshold and temporarily reduces turn speed to <code>130 PWM</code> for precision rotation.</li>
+              <li><code>alignToLine()</code> begins with a slow right strafe at roughly <code>76 PWM</code>, then follows the line at <code>120 PWM</code>.</li>
+              <li>Line-follow corrections use differential wheel commands of <code>30</code> and <code>100 PWM</code> to steer back onto the line.</li>
+              <li><code>returnToSquare()</code> reverses at <code>90 PWM</code> and finishes with a <code>120 PWM</code> left strafe into the corner.</li>
             </ul>
           </div>
 
@@ -286,14 +447,14 @@
               <h3>Orientation and Line Logic</h3>
               <div class="prose">
                 <p>
-                  `squareToWall()` implements the core ultrasonic orientation routine. It reads the left, right,
-                  and back sensors, classifies the robot's heading from wall visibility, and preserves a `turnDir`
-                  state so the chassis keeps rotating through ultrasonic blind spots instead of stalling on `999`
+                  <code>squareToWall()</code> implements the core ultrasonic orientation routine. It reads the left, right,
+                  and back sensors, classifies the robot's heading from wall visibility, and preserves a <code>turnDir</code>
+                  state so the chassis keeps rotating through ultrasonic blind spots instead of stalling on <code>999</code>
                   timeout readings.
                 </p>
                 <p>
                   Once forward orientation is locked, the code transitions into a back-left tuck toward the corner.
-                  `alignToLine()` then strafes right until the back-center IR sensor crosses the threshold, after
+                  <code>alignToLine()</code> then strafes right until the back-center IR sensor crosses the threshold, after
                   which the front-left and front-right sensors handle differential line following. The hog line stop
                   condition is explicit: both front sensors must simultaneously detect black tape.
                 </p>
@@ -310,25 +471,25 @@
 
           <div class="subsection">
             <h3>Scoring and Multi-Cycle Sequence</h3>
-            <div class="prose">
-              <p>
-                The actual `score()` function is more specific than the high-level summary. For each scoring cycle,
-                the turn motor is driven at full PWM for `1.5 seconds`, the pusher extends at full PWM for `3
-                seconds`, and the pusher retracts at full PWM for another `3 seconds`. That inner cycle is repeated
-                three times.
-              </p>
-              <p>
-                The top-level tournament loop then executes three attack positions: one centered scoring pass, one
-                pass with a short right strafe of `300 ms`, and one pass with a short left strafe of `300 ms`. Each
-                of the later passes is separated by a five-second reload delay and a fresh line-acquisition phase.
-              </p>
-            </div>
+              <div class="prose">
+                <p>
+                  The actual <code>score()</code> function is more specific than the high-level summary. For each scoring cycle,
+                  the turn motor is driven at full PWM for <code>1.5 seconds</code>, the pusher extends at full PWM for <code>3</code>
+                  seconds, and the pusher retracts at full PWM for another <code>3 seconds</code>. That inner cycle is repeated
+                  three times.
+                </p>
+                <p>
+                  The top-level tournament loop then executes three attack positions: one centered scoring pass, one
+                  pass with a short right strafe of <code>300 ms</code>, and one pass with a short left strafe of <code>300 ms</code>. Each
+                  of the later passes is separated by a five-second reload delay and a fresh line-acquisition phase.
+                </p>
+              </div>
           </div>
         </section>
 
         <section id="outcomes" class="section">
           <div class="section-heading">
-            <p class="section-label">Section 6</p>
+            <p class="section-label">Section 7</p>
             <h2>Outcomes</h2>
           </div>
           <ul class="bullet-list bullet-list--strong">
@@ -351,7 +512,7 @@
 
         <section id="lessons" class="section">
           <div class="section-heading">
-            <p class="section-label">Section 7</p>
+            <p class="section-label">Section 8</p>
             <h2>Lessons Learned</h2>
           </div>
           <div class="callout-panel callout-panel--compact">
