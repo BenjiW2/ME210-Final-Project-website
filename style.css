@@ -285,6 +285,41 @@ h3 {
   background: rgba(255, 255, 255, 0.92);
 }
 
+
+.code-panel {
+  overflow: hidden;
+  border: 1px solid rgba(31, 35, 40, 0.12);
+  border-radius: 20px;
+  background: #11161c;
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.18);
+}
+
+.code-panel__header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: #8ea0b4;
+  font-size: 0.9rem;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+pre {
+  margin: 0;
+  padding: 22px 24px 28px;
+  overflow-x: auto;
+}
+
+pre code {
+  display: block;
+  color: #e7edf3;
+  font-family: "SFMono-Regular", Menlo, Consolas, Monaco, monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  white-space: pre;
+}
+
 .info-card h3,
 .team-card h3 {
   margin: 8px 0 8px;
@@ -492,6 +527,7 @@ h3 {
   .team-grid,
   .asset-grid,
   .calc-grid,
+  .cad-layout,
   .split-layout {
     grid-template-columns: 1fr;
   }
@@ -652,5 +688,9 @@ h3 {
   .process-step::before {
     left: 18px;
     top: 18px;
+  }
+
+  pre {
+    padding: 18px 16px 22px;
   }
 }
