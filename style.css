@@ -418,6 +418,23 @@ pre code {
   margin-top: 0;
 }
 
+.calc-card p {
+  margin-bottom: 0;
+}
+
+.calc-card .compact-list {
+  margin-top: 10px;
+}
+
+.meta-inline {
+  margin: 14px 0 0;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
 .math-line {
   margin: 0 0 10px;
   font-family: "SFMono-Regular", Menlo, Consolas, Monaco, monospace;
