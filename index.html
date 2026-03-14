@@ -251,7 +251,68 @@
               </figcaption>
             </figure>
           </div>
+<h3>Electronic Hardware</h3>
 
+<h4>Motor Driver</h4>
+<p><strong>TB6612FNG Motor Driver</strong></p>
+<p>
+Lets a low-power control signal safely control the higher voltage and current required to run a motor, often enabling speed and direction control.
+</p>
+
+<h4>Sensors</h4>
+
+<p><strong>IR Line Sensor</strong></p>
+<p>
+This sensor was used to detect the hog line and for line tracing to correct for using mecanum drive without encoders, allowing the robot to drive in a straight line without veering off course.
+</p>
+
+<p><strong>Ultrasonic Sensor</strong></p>
+<p>
+This sensor was used to detect distances between the robot and the walls that encase the arena. These measurements were then used to correct the robot’s orientation and later confirm its position relative to the walls.
+</p>
+
+<h4>Motors</h4>
+
+<p><strong>Brushed DC Motors</strong></p>
+
+<p><strong>Pros</strong></p>
+<ul>
+<li>Inexpensive</li>
+<li>Simple control</li>
+<li>Easy to repair</li>
+</ul>
+
+<p><strong>Cons</strong></p>
+<ul>
+<li>No encoders</li>
+<li>No position feedback</li>
+<li>Mechanical stops must be used for the rack and/or voltage must remain consistent for a time-based control approach</li>
+</ul>
+
+<h4>Pinion Motor</h4>
+<p><strong>12V 60 RPM Gear Motor – High Torque 6.5 kg·cm</strong></p>
+
+<p><strong>Reasons for selection</strong></p>
+<ul>
+<li>The motor needed to move the rack and carry a load of one puck (more if additional pucks were on the ground). A significant amount of torque was required.</li>
+<li>The rack needed to traverse its full length in a reasonable amount of time. The motor needed to be fast enough to complete the motion efficiently but not so fast that it became unstable.</li>
+</ul>
+
+<h4>Turntable Motor</h4>
+<p><strong>12V 10 RPM Gear Motor – High Torque 15 kg·cm</strong></p>
+
+<ul>
+<li>The motor needed to carry and rotate the weight of up to three pucks. High torque was required to ensure it would not stall.</li>
+<li>Turntable speed was not a major concern because the puck only needed to travel a very small distance to the shooter, so a low RPM motor was selected to ensure steady motion.</li>
+</ul>
+
+<h4>Drivetrain Motor</h4>
+<p><strong>12V 150 RPM Gear Motor – High Torque 5 kg·cm</strong></p>
+
+<ul>
+<li>The four motors needed to carry and distribute the weight of the entire robot and its mechanisms. High torque motors were required to prevent stalling or mechanical failure.</li>
+<li>Speed was not the primary concern. The goal was for the robot to move slowly and steadily, using the full time available to reduce imprecision, so a moderate RPM motor was selected.</li>
+</ul>
           <div class="subsection">
             <h3>Motor Driver and Sensors</h3>
             <div class="calc-grid">
